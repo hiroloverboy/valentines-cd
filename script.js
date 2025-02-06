@@ -1,32 +1,27 @@
-// Set Valentine's Day (February 14, 2025)
-const valentineDate = new Date('February 14, 2025 00:00:00').getTime();
+// Set Valentine's Day date
+const valentineDate = new Date(new Date().getFullYear(), 1, 14, 0, 0, 0).getTime();
 
-// Function to update the countdown timer
 function updateCountdown() {
     const now = new Date().getTime();
     const timeLeft = valentineDate - now;
 
-    // Time calculations
+    // Calculate time left in days, hours, minutes, and seconds
     const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    // Display the results
-    document.getElementById("days").innerHTML = `${days} Days`;
-    document.getElementById("hours").innerHTML = `${hours} Hours`;
-    document.getElementById("minutes").innerHTML = `${minutes} Minutes`;
-    document.getElementById("seconds").innerHTML = `${seconds} Seconds`;
+    // Display countdown
+    document.getElementById("countdown").innerHTML = 
+        `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
 
-    // If the countdown is finished
+    // If countdown is over
     if (timeLeft < 0) {
+        document.getElementById("countdown").innerHTML = "Happy Valentine's Day! 💖";
         clearInterval(timer);
-        document.getElementById("countdown").innerHTML = "Happy Valentine's Day!";
     }
 }
 
-// Update the countdown every second
+// Update every second
 const timer = setInterval(updateCountdown, 1000);
-
-// Initial call to set the countdown immediately
-updateCountdown();
+updateCountdown(); // Run immediately when page loads
